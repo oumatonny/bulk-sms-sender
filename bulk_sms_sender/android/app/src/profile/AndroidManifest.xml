@@ -1,0 +1,6 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Used only by Flutter tooling (hot reload/DevTools) in debug
+         builds. Not present in the release manifest and never used by
+         app code - SMS sending never touches the network. -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+</manifest>

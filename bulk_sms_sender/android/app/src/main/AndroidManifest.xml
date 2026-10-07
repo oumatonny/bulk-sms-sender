@@ -1,0 +1,61 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+      SEND_SMS: required to actually send messages through the SIM using
+      android.telephony.SmsManager. This is the core permission the app
+      cannot function without, and it is requested at runtime (not just
+      declared here) via permission_handler before any send attempt.
+    -->
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
+    <!--
+      READ_PHONE_STATE: only used to enumerate SIM subscriptions on
+      dual-SIM devices (SubscriptionManager) so the user can pick which
+      SIM sends the campaign, and to detect whether a SIM is present
+      before sending. Not used for anything else - no phone number or
+      IMEI is read or transmitted anywhere.
+    -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <!-- Declares the app uses telephony (SMS); does not require the
+         device to support calling. Lets the app still install on
+         SMS-capable tablets/devices without cellular voice. -->
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="true" />
+
+    <application
+        android:label="Bulk Messenger"
+        android:name="${applicationName}"
+        android:icon="@android:drawable/sym_def_app_icon">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize">
+            <meta-data
+              android:name="io.flutter.embedding.android.NormalTheme"
+              android:resource="@style/NormalTheme"
+              />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
+    </application>
+
+    <!-- Required to query package manager for text/plain files on some
+         Android versions when using file_picker. -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.GET_CONTENT" />
+            <data android:mimeType="*/*" />
+        </intent>
+    </queries>
+</manifest>
